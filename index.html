@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>L2tS</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <i class="fas fa-star"></i>
+                <span>L2tS</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#" class="active nav-link" data-page="home">Home</a></li>
+                    <li><a href="#" class="nav-link" data-page="library">My Library</a></li>
+                    <li><a href="#" class="nav-link" data-page="browse">Browse</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <div class="theme-switcher">
+                    <button class="theme-btn" id="themeBtn">
+                        <i class="fas fa-palette"></i>
+                    </button>
+                    <div class="theme-options" id="themeOptions">
+                        <div class="theme-option theme-light active" data-theme="light">
+                            <div class="theme-color"></div>
+                            <span>Light</span>
+                        </div>
+                        <div class="theme-option theme-dark" data-theme="dark">
+                            <div class="theme-color"></div>
+                            <span>Dark</span>
+                        </div>
+                        <div class="theme-option theme-forest" data-theme="forest">
+                            <div class="theme-color"></div>
+                            <span>Forest</span>
+                        </div>
+                        <div class="theme-option theme-ocean" data-theme="ocean">
+                            <div class="theme-color"></div>
+                            <span>Ocean</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="user-actions">
+                    <button class="btn btn-outline" id="loginBtn">Login</button>
+                    <button class="btn btn-primary" id="signupBtn">Sign Up</button>
+                    <div class="user-menu" id="userMenu" style="display: none;">
+                        <button class="btn btn-outline" id="logoutBtn">Logout</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>✨ Letters to the Stars ✨</h1>
+            <p>The field is ink, the goal is immortality</p>
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Search for stories, tags, or authors...">
+                <button id="searchBtn"><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Home Page -->
+        <div id="homePage" class="page-content active">
+            <div class="main-content">
+                <div class="stories-section">
+                    <h2 class="section-title">Latest Stories</h2>
+                    <div class="stories-grid" id="storiesGrid">
+                        <!-- Stories will be loaded here -->
+                        <div class="loading">Loading stories...</div>
+                    </div>
+                </div>
+                
+                <aside class="sidebar">
+                    <div class="sidebar-section">
+                        <h3>Categories</h3>
+                        <ul class="category-list" id="categoryList">
+                            <!-- Tags will be loaded here -->
+                        </ul>
+                    </div>
+                    <div class="sidebar-section">
+                        <h3>Statistics</h3>
+                        <div class="stats">
+                            <div class="stat-item">
+                                <span>Total Stories</span>
+                                <strong id="totalStories">0</strong>
+                            </div>
+                            <div class="stat-item">
+                                <span>Your Reading</span>
+                                <strong id="userReading">0</strong>
+                            </div>
+                            <div class="stat-item">
+                                <span>Completed</span>
+                                <strong id="userCompleted">0</strong>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+
+        <!-- Library Page -->
+        <div id="libraryPage" class="page-content">
+            <h2 class="section-title">My Library</h2>
+            <div class="library-tabs">
+                <button class="tab-btn active" data-tab="reading">Reading</button>
+                <button class="tab-btn" data-tab="completed">Completed</button>
+                <button class="tab-btn" data-tab="saved">Saved</button>
+            </div>
+            <div class="stories-grid" id="libraryGrid">
+                <p class="empty-state">Please log in to see your library</p>
+            </div>
+        </div>
+
+        <!-- Browse Page -->
+        <div id="browsePage" class="page-content">
+            <h2 class="section-title">Browse All Stories</h2>
+            <div class="filter-section">
+                <select id="sortSelect" class="filter-select">
+                    <option value="latest">Latest</option>
+                    <option value="oldest">Oldest</option>
+                    <option value="title">Title A-Z</option>
+                </select>
+                <div class="tag-filters" id="tagFilters">
+                    <!-- Tag filters will be loaded here -->
+                </div>
+            </div>
+            <div class="stories-grid" id="browseGrid">
+                <!-- Stories will be loaded here -->
+            </div>
+        </div>
+
+        <!-- Story Reader Page -->
+        <div id="readerPage" class="page-content">
+            <div class="reader-container">
+                <button class="back-btn" id="backBtn">
+                    <i class="fas fa-arrow-left"></i> Back
+                </button>
+                <article class="story-content">
+                    <h1 id="storyTitle"></h1>
+                    <div class="story-meta-reader">
+                        <span id="storyDate"></span>
+                        <div class="story-tags-reader" id="storyTagsReader"></div>
+                    </div>
+                    <div class="reading-progress-bar">
+                        <div class="reading-progress-fill" id="readingProgress"></div>
+                    </div>
+                    <div class="story-text" id="storyContent"></div>
+                </article>
+                <div class="reader-actions">
+                    <button class="btn btn-outline" id="saveStoryBtn">
+                        <i class="far fa-bookmark"></i> Save to Library
+                    </button>
+                    <button class="btn btn-primary" id="markCompleteBtn">
+                        <i class="fas fa-check"></i> Mark Complete
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Auth Modal -->
+    <div class="modal" id="authModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 id="authTitle">Login</h2>
+            <form id="authForm">
+                <input type="email" id="authEmail" placeholder="Email" required>
+                <input type="password" id="authPassword" placeholder="Password" required>
+                <button type="submit" class="btn btn-primary full-width">Submit</button>
+            </form>
+            <p class="auth-switch">
+                <span id="authSwitchText">Don't have an account?</span>
+                <a href="#" id="authSwitchLink">Sign up</a>
+            </p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-section">
+                <h3>L2tS</h3>
+                <p>Letters to the Stars</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-github"></i></a>
+                    <a href="#"><i class="fab fa-discord"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Support</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Help Center</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Report Issue</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="container copyright">
+            <p>&copy; 2025 L2tS - Letters to the Stars. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="app.js"></script>
+</body>
+</html>
